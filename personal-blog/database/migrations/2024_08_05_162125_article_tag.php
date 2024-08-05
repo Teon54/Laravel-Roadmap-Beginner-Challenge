@@ -11,16 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('articles', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('category_id');
-            $table->string('title');
-            $table->string('body');
-            $table->string('image')->nullable();
-            $table->softDeletes();
+        Schema::create('article_tag', function (Blueprint $table) {
+            $table->primary(['article_id','tag_id']);
+            $table->foreignId('article_id');
+            $table->foreignId('tag_id');
             $table->timestamps();
         });
+
     }
 
     /**
@@ -28,6 +25,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('articles');
+        Schema::dropIfExists('article_tag');
+
     }
 };
