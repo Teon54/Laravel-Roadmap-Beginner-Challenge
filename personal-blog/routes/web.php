@@ -1,11 +1,11 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -17,4 +17,25 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+// Routes Article for show article to all users
+Route::get('/', 'App\Http\Controllers\ArticleController@index');
+
+Route::resource('/article', ArticleController::class)
+    ->only(['show']);
+
+// Routes group for middleware auth user
+Route::middleware('auth')->group(function () {
+    Route::resources([
+        'article' => ArticleController::class,
+        'tag' => TagController::class,
+        'category' => CategoryController::class,
+    ],
+        [
+            'except' => ['index', 'show']
+        ]);
+});
+// Route single page view about me
+Route::view('/aboutme', 'aboutMe')
+    ->name('aboutme');
+
+require __DIR__ . '/auth.php';
