@@ -117,6 +117,7 @@
       <excludeFolder url="file://$MODULE_DIR$/personal-blog/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/personal-blog/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/personal-blog/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/personal-blog/vendor/_laravel_idea" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
