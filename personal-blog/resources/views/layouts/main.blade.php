@@ -25,7 +25,9 @@
 <body class="bg-gray-300 dark:bg-gray-900">
 <header class="flex flex-row justify-between mt-3 mx-5">
     <h1 class="text-black dark:text-white text-3xl">
-        Personal Blog
+        <a href="{{ route('home') }}" class="hover:text-blue-600">
+            Personal Blog
+        </a>
     </h1>
     <nav>
         <a href="{{ route('aboutme') }}" class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">About Me</a>

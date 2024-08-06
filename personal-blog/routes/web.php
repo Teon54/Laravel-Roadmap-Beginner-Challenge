@@ -18,7 +18,8 @@ Route::middleware('auth')->group(function () {
 });
 
 // Routes Article for show article to all users
-Route::get('/', 'App\Http\Controllers\ArticleController@index');
+Route::get('/', 'App\Http\Controllers\ArticleController@index')
+    ->name('home');
 
 Route::resource('/article', ArticleController::class)
     ->only(['show']);
