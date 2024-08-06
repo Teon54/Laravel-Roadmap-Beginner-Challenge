@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -12,9 +13,9 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::with(['category','tags'])->paginate(5);
+        $articles = Article::with(['category', 'tags'])->paginate(5);
 
-        return view('article.index',[
+        return view('article.index', [
             'articles' => $articles,
         ]);
     }
@@ -40,7 +41,14 @@ class ArticleController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $article = Article::findOrFail($id);
+
+        $formatedTime = Carbon::create($article->created_at)->format('M d, Y');
+
+        return view('article.show', [
+            'article' => $article,
+            'formatedTime' => $formatedTime,
+        ]);
     }
 
     /**
