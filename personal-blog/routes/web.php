@@ -3,6 +3,8 @@
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ListArticleController;
+use App\Http\Controllers\ListCategoryController;
+use App\Http\Controllers\ListTagController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +17,14 @@ Route::get('/dashboard', function () {
 // Route for list of article to edit in dashboard with middleware
 Route::get('/list/article', ListArticleController::class)
     ->name('list.article')
+    ->middleware('auth');
+// Route for list of category to edit in dashboard with middleware
+Route::get('/list/category', ListCategoryController::class)
+    ->name('list.category')
+    ->middleware('auth');
+// Route for list of tag to edit in dashboard with middleware
+Route::get('/list/tag', ListTagController::class)
+    ->name('list.tag')
     ->middleware('auth');
 
 // Profile routes with auth middleware
