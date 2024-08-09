@@ -8,19 +8,11 @@ use Illuminate\Http\Request;
 class TagController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('tag.create');
     }
 
     /**
@@ -28,23 +20,24 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:tags,name',
+        ]);
+
+        $tag = Tag::create([
+            'name' => $validated['name'],
+        ]);
+
+        return redirect()->route('list.tag')->with('success', 'Tag successfully added!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Tag $tag)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Tag $tag)
     {
-        //
+        return view('tag.edit', compact('tag'));
     }
 
     /**
@@ -52,7 +45,15 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:tags,name,' . $tag->id,
+        ]);
+
+        $tag->update([
+            'name' => $validated['name'],
+        ]);
+
+        return redirect()->route('list.tag')->with('success', 'Tag successfully updated!');
     }
 
     /**
@@ -60,6 +61,8 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+
+        return redirect()->route('list.tag')->with('success', 'Tag successfully deleted!');
     }
 }
