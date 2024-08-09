@@ -15,11 +15,25 @@
                 </h1>
             </header>
             @isset($article->image)
-                <img alt="Image Cover" src="" class="rounded"/>
+                <img alt="Image Cover" src="{{ asset('storage/' . $article->image) }}" class="rounded"/>
             @endisset
-           <p class="text-white dark:text-black">
+           <p class="my-5 text-black dark:text-white">
                {{ $article->body }}
            </p>
+            <hr>
+            <p class="my-5 text-black dark:text-white">
+               Category:
+           </p>
+            <span class="mb-5 bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $article->category->name }}</span>
+
+            @if($article->tags->count() > 0)
+                <p class="my-5 text-black dark:text-white">
+                    Tags:
+                </p>
+                @foreach($article->tags as $tag)
+                    <span class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-yellow-300 border border-yellow-300">{{ $tag->name }}</span>
+                @endforeach
+            @endif
         </article>
     </div>
 @endcomponent

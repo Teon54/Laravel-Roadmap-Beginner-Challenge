@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ListArticleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
@@ -10,6 +11,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+// Route for list of article to edit in dashboard with middleware
+Route::get('/list/article', ListArticleController::class)
+    ->name('list.article')
+    ->middleware('auth');
 
 // Profile routes with auth middleware
 Route::middleware('auth')->group(function () {

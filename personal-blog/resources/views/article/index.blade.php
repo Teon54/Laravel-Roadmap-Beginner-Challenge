@@ -4,4 +4,7 @@
             <x-card-article :article="$article"/>
         @endforeach
     </div>
+    <div class="flex items-center justify-center">
+        {{ $articles->links() }}
+    </div>
 @endcomponent
